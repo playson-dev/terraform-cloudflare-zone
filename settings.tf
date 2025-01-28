@@ -8,6 +8,8 @@ locals {
       browser_cache_ttl = lookup(sett, "browser_cache_ttl", 14400)
       brotli            = lookup(sett, "brotli", "on")
       http3             = lookup(sett, "http3", "on")
+      minimum_tls_version = lookup(sett, "minimum_tls_version", "1.1")
+      
     }
   } : {}
 }
@@ -23,6 +25,7 @@ resource "cloudflare_zone_settings_override" "this" {
     browser_cache_ttl = each.value.browser_cache_ttl
     brotli            = each.value.brotli
     http3             = each.value.http3
+    minimum_tls_version = each.value.minimum_tls_version
   }
   depends_on = [
     cloudflare_zone.default
