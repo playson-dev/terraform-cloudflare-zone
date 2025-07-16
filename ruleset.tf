@@ -62,7 +62,6 @@ resource "cloudflare_ruleset" "default" {
           ssl                        = action_parameters.value.ssl
           status_code                = action_parameters.value.status_code
           sxg                        = action_parameters.value.sxg
-          version                    = action_parameters.value.version
 
           # Compression algorithms to use in order of preference.
           dynamic "algorithms" {
