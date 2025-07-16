@@ -73,3 +73,7 @@ output "load_balancers" {
 output "lb_pools" {
   value = local.lb_pools
 }
+
+output "rulesets" {
+  values = local.rulesets
+}
