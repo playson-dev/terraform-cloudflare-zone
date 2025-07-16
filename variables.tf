@@ -163,6 +163,6 @@ variable "cloudflare_lists" {
 }
 
 variable "rulesets" {
-  type    = list(map(any))
-  default = []
+  type    = any
+  default = null
 }
