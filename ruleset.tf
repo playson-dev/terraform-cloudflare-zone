@@ -38,12 +38,9 @@ resource "cloudflare_ruleset" "default" {
       dynamic "action_parameters" {
         for_each = lookup(rules.value, "action_parameters", null) != null ? [rules.value.action_parameters] : []
         content {
-          id           = lookup(action_parameters.value, "id", null)
-          cache        = lookup(action_parameters.value, "cache", null)
-          content      = lookup(action_parameters.value, "content", null)
-          content_type = lookup(action_parameters.value, "content_type", null)
-          status_code  = lookup(action_parameters.value, "status_code", null)
-          response     = lookup(action_parameters.value, "response", null)
+          id                         = lookup(action_parameters.value, "id", null)
+          origin_error_page_passthru = lookup(action_parameters.value, "origin_error_page_passthru", null)
+          cache                      = lookup(action_parameters.value, "cache", null)
 
           # headers block
           dynamic "headers" {
@@ -52,6 +49,14 @@ resource "cloudflare_ruleset" "default" {
               name      = lookup(headers.value, "name", null)
               operation = lookup(headers.value, "operation", null)
               value     = lookup(headers.value, "value", null)
+            }
+          }
+
+          dynamic "edge_ttl" {
+            for_each = lookup(action_parameters.value, "edge_ttl", null) != null ? [action_parameters.value.edge_ttl] : []
+            content {
+              mode    = lookup(edge_ttl.value, "mode", null)
+              default = lookup(edge_ttl.value, "default", null)
             }
           }
 
