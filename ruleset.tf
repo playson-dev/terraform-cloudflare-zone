@@ -61,7 +61,12 @@ resource "cloudflare_ruleset" "default" {
             content {
               status_code           = lookup(from_value.value, "status_code", null)
               preserve_query_string = lookup(from_value.value, "preserve_query_string", null)
-              target_url            = lookup(from_value.value, "target_url", null)
+              dynamic "target_url" {
+                for_each = lookup(from_value.value, "target_url", null) != null ? [from_value.value.target_url] : []
+                content {
+                  value = lookup(target_url.value, "value", null)
+                }
+              }
             }
           }
 
