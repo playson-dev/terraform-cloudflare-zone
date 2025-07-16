@@ -75,5 +75,5 @@ output "lb_pools" {
 }
 
 output "rulesets" {
-  values = local.rulesets
+  value = local.rulesets
 }
