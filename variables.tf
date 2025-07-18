@@ -166,3 +166,10 @@ variable "rulesets" {
   type    = any
   default = null
 }
+
+variable "create_acm" {
+  type        = bool
+  description = "Need to create acm for this domain or not"
+  default     = false
+
+}
