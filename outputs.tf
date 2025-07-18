@@ -77,3 +77,7 @@ output "lb_pools" {
 output "rulesets" {
   value = local.rulesets
 }
+
+output "create_acm" {
+  value = var.create_acm
+}
