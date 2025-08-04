@@ -49,6 +49,13 @@ resource "cloudflare_ruleset" "default" {
               value     = lookup(headers.value, "value", null)
             }
           }
+          dynamic "origin" {
+            for_each = lookup(action_parameters.value, "origin", null) == null ? [] : [lookup(action_parameters.value, "origin", {})]
+            content {
+              host = lookup(origin.value, "host", null)
+              port = lookup(origin.value, "port", null)
+            }
+          }
           dynamic "edge_ttl" {
             for_each = lookup(action_parameters.value, "edge_ttl", null) == null ? [] : [lookup(action_parameters.value, "edge_ttl", {})]
 
