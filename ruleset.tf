@@ -49,6 +49,8 @@ resource "cloudflare_ruleset" "default" {
               value     = lookup(headers.value, "value", null)
             }
           }
+
+          host_header = lookup(action_parameters.value, "host_header", null)
           dynamic "origin" {
             for_each = lookup(action_parameters.value, "origin", null) == null ? [] : [lookup(action_parameters.value, "origin", {})]
             content {
