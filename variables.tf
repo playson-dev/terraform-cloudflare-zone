@@ -87,6 +87,15 @@ variable "argo_smart_routing_enabled" {
   default     = true
 }
 
+
+variable "custom_hostname_fallback_origin" {
+  description = "Cloudflare custom hostname fallback origins"
+  type = list(object({
+    origin = string
+  }))
+  default = []
+}
+
 variable "healthchecks" {
   type        = list(any)
   default     = null
