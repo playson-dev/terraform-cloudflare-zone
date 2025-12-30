@@ -1,0 +1,2 @@
+# Ignore go.sum files - false positives (Go module checksums, not secrets)
+**/go.sum
